@@ -1,0 +1,16 @@
+insert into bigsam values('kim49892','2222');
+insert into bigsam values('kim49893','3333');
+insert into bigsam values('kim49894','4444');
+insert into bigsam values('kim49895','5555');
+insert into bigsam values('kim49896','6666');
+insert into bigsam values('kim49897','7777');
+insert into bigsam values('kim49898','8888');
+insert into bigsam values('kim49899','9999');
+insert into bigsam values('kim498910','10101010');
+
+
+
+select * from bigsam;
+
+
+commit ;

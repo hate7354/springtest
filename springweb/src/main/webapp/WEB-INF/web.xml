@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://Java.sun.com/xml/ns/javaee https://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+
+
+
+<!--
+	작성일         작성자                          작성내용
+   ==========      ========      =================================================
+   2021.05.28		김현호									최초 기동시 filter 적용 
+   
+
+  ************************************************************************************************
+	   
+	1. Spring Security 필터 설정 : 주석
+	2. Spring Security 로그인/로그아웃 설정을 위한 필터 설정 : 주석
+	3. EgovSSO 로그인/로그아웃 설정을 위한 필터 설정 : 주석
+  ************************************************************************************************
+-->
+    <display-name>egovframework default</display-name>
+    <filter>
+        <filter-name>encodingFilter</filter-name>
+        <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+        <init-param>
+            <param-name>encoding</param-name>
+            <param-value>utf-8</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>encodingFilter</filter-name>
+        <url-pattern>*.do</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>encodingFilter</filter-name>
+        <url-pattern>*.mdo</url-pattern>
+    </filter-mapping>
+    
+    <filter-mapping>
+        <filter-name>encodingFilter</filter-name>
+        <url-pattern>*.smart</url-pattern>
+    </filter-mapping>
+
+    <filter>
+        <filter-name>HTMLTagFilter</filter-name>
+        <filter-class>com.base.webapp.common.filter.HTMLTagFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>HTMLTagFilter</filter-name>
+        <url-pattern>*.do</url-pattern>
+    </filter-mapping>
+
+	<!-- 0. 로그인 정책 컴포넌트용 필터 -->
+	<!--
+    <filter>
+        <filter-name>LoginPolicyFilter</filter-name>
+        <filter-class>egovframework.com.uat.uap.filter.EgovLoginPolicyFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>LoginPolicyFilter</filter-name>
+        <url-pattern>/uat/uia/actionLogin.do</url-pattern>
+    </filter-mapping>
+     -->
+	<!-- Restoration from HTMLTagFilter's action (certification login) -->
+
+<!--     <context-param> -->
+<!--         <param-name>contextConfigLocation</param-name> -->
+<!--         <param-value>classpath*:egovframework/spring/com/context-*.xml</param-value> -->
+<!--     </context-param> -->
+
+
+
+	<!-- The definition of the Root Spring Container shared by all Servlets and Filters -->
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>/WEB-INF/spring/root-context.xml</param-value>
+	</context-param>
+	
+	<!-- Creates the Spring Container shared by all Servlets and Filters -->
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+
+	<!-- Processes application requests -->
+	<servlet>
+		<servlet-name>appServlet</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>/WEB-INF/spring/appServlet/servlet-context.xml</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+		
+	<servlet-mapping>
+		<servlet-name>appServlet</servlet-name>
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
+
+</web-app>
